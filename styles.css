@@ -53,6 +53,7 @@ button:hover {
 
 .bottom-number {
     margin: 10px;
+    font-size: 20px;
     flex: 2;
 }
 
