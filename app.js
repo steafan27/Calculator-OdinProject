@@ -12,8 +12,10 @@ const clearBtn = document.querySelector('.clear');
 clearBtn.addEventListener('click' , clearAll);
 
 const deleteBtn = document.querySelector('.delete');
+deleteBtn.addEventListener('click' , deleteNumber);
 
 const decimalBtn = document.querySelector('.decimal');
+decimalBtn.addEventListener('click' , addDecimal);
 
 const equalBtn = document.querySelector('.equals');
 equalBtn.addEventListener('click' , calculate);
@@ -35,6 +37,14 @@ function operatorHandler(e) {
     displayBottom.textContent = '';
 };
 
+function addDecimal() {
+    if(!currentNumber) {
+        currentNumber = '0.'
+    }else if(currentNumber) {
+        currentNumber += '.'
+    };
+};
+
 function calculate() {
     currentNumber = Number(currentNumber);
     previousNumber = Number(previousNumber);
@@ -51,15 +61,21 @@ function calculate() {
     }else if(operator === '/'){
         if(!currentNumber){
             displayBottom.textContent = `Error`;
-        }else{
-            displayBottom.textContent = `${previousNumber / currentNumber}`;
-        }
-        
+        }else {displayBottom.textContent = `${previousNumber / currentNumber}`};
+
     }else if(operator === '^n'){
         displayBottom.textContent = `${previousNumber ** currentNumber}`;
-
     };
+};
 
+function deleteNumber() {
+    let currentNumberPlaceHolder
+    if(currentNumber) {
+        currentNumberPlaceHolder = currentNumber.split('');
+        currentNumberPlaceHolder.pop();
+        currentNumber = currentNumberPlaceHolder.join('');
+        displayBottom.textContent = `${currentNumber}`; 
+    };
 };
 
 function clearAll() {
@@ -68,5 +84,4 @@ function clearAll() {
     operator = '';
     displayTop.textContent = '';
     displayBottom.textContent = '';
-
 };
